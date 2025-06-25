@@ -1,11 +1,16 @@
 # nhls_py
 
-A python module for utilizing [`NHLS`](https://github.com/TEALab-org/nhls).
-`nhls_py` is not a set of bindings for a rust library.
-Instead it generates rust code and executes binaries that utilize NHLS as a dependency.
+A python module for utilizing [`nhls`](https://github.com/TEALab-org/nhls).
+`nhls_py` is not bindings to a rust library.
+Instead it generates rust code 
+and executes binaries that utilize `nhls`as a dependency.
 `nhls_py` requires that the user has [`rustup`](https://rustup.rs) installed.
+
 Every session, prior to utilizing the library, please call `nhls_py.session_init()`.
-This will ensure that the correct rust toolchain is available, as well as the correct version of `NHLS`.
+This will ensure that the correct rust toolchain is available,
+and a suitable build directory is setup.
+By default all build artifacts will live in `~/.cache/nhls`, but
+an alternative directory can optially be passed to `session_init`.
 
 ## Notebooks
 
