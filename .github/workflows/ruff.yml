@@ -10,11 +10,6 @@ jobs:
   lint_and_format:
     name: Build and Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        features:
-          - default
-          - profile-with-puffin
     steps:
     - uses: actions/checkout@v4
     - uses: astral-sh/ruff-action@v3
