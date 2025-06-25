@@ -1,0 +1,22 @@
+# rust stuff
+/target
+
+# macOS stuff
+*.DS_STORE
+
+# Profiling
+*.prof
+
+# Misc stuff
+*.wisdom
+*.png
+*.mp4
+*.sh
+*-e
+*.txt
+*.svg
+*.dot
+
+# Python Stuff
+__pycache__
+.ipynb_checkpoints
