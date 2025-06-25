@@ -3,18 +3,16 @@ from importlib.resources import files
 from pathlib import Path
 import subprocess
 
+
 def check_rustup_present():
     try:
-        subprocess.run(
-            ["rustup"], 
-            stdout=subprocess.DEVNULL, 
-            stderr=subprocess.DEVNULL
-        )
+        subprocess.run(["rustup"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         return True
     except FileNotFoundError:
-        return False    
+        return False
 
-def session_init(nhls_path = None):
+
+def session_init(nhls_path=None):
     # Load NHLS version information
     nhls_version_path = files("nhls_py") / "nhls_version.json"
     print(f"nhls_version_path: {nhls_version_path}")
@@ -26,7 +24,7 @@ def session_init(nhls_path = None):
     nhls_url = nhls_version["url"]
     print(f"nhls branch: {nhls_branch}, url: {nhls_url}")
 
-    # Figure out where checkout should be 
+    # Figure out where checkout should be
     global NHLS_CHECKOUT_PATH
     NHLS_CHECKOUT_PATH = "~/.cache/nhls"
     if nhls_path is None:
@@ -51,11 +49,11 @@ def session_init(nhls_path = None):
             nhls_path,
         ]
         subprocess.run(
-            clone_args, 
-            cwd=nhls_path.parent, 
-            capture_output=False, 
-            text=True, 
-            check=True
+            clone_args,
+            cwd=nhls_path.parent,
+            capture_output=False,
+            text=True,
+            check=True,
         )
 
     # Check that rustup is present
@@ -65,7 +63,7 @@ def session_init(nhls_path = None):
         print("please install rustup!")
         print("https://rustup.rs")
         raise ValueError("Rustup not installed")
-        
+
     # Ensure correct toolchain is present
     print("checking toolchain...")
     tool_args = [
@@ -74,11 +72,7 @@ def session_init(nhls_path = None):
         "install",
     ]
     subprocess.run(
-        tool_args, 
-        cwd=nhls_path,
-        capture_output=False, 
-        text=True, 
-        check=True
+        tool_args, cwd=nhls_path, capture_output=False, text=True, check=True
     )
 
     # Run cargo build now
@@ -88,13 +82,9 @@ def session_init(nhls_path = None):
         "cargo",
         "build",
         "--release",
-    ] 
+    ]
     subprocess.run(
-        build_args, 
-        cwd=nhls_path,
-        capture_output=False, 
-        text=True, 
-        check=True
+        build_args, cwd=nhls_path, capture_output=False, text=True, check=True
     )
 
     # Done
