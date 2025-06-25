@@ -2,6 +2,7 @@ import json
 from importlib.resources import files
 from pathlib import Path
 import subprocess
+from . import nhls_path 
 
 def check_rustup_present():
     try:
@@ -14,7 +15,7 @@ def check_rustup_present():
     except FileNotFoundError:
         return False    
 
-def session_init(nhls_path = None):
+def session_init(nhls_path_override = None):
     # Load NHLS version information
     nhls_version_path = files("nhls_py") / "nhls_version.json"
     print(f"nhls_version_path: {nhls_version_path}")
@@ -27,11 +28,11 @@ def session_init(nhls_path = None):
     print(f"nhls branch: {nhls_branch}, url: {nhls_url}")
 
     # Figure out where checkout should be 
-    global NHLS_CHECKOUT_PATH
-    NHLS_CHECKOUT_PATH = "~/.cache/nhls"
-    if nhls_path is None:
-        nhls_path = Path(NHLS_CHECKOUT_PATH).expanduser()
-    NHLS_CHECKOUT_PATH = nhls_path
+    global nhls_path 
+    if nhls_path_override is None:
+        nhls_path = Path(nhls_path).expanduser()
+    else:
+        nhls_path = nhls_path_override
     print(f"nhls path: {nhls_path}")
 
     # TODO (rb): Add some better checks here,
