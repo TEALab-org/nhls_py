@@ -1,5 +1,7 @@
 # nhls_py
 
+![Rust workflow](https://github.com/TEALab-org/nhls_py/actions/workflows/ruff.yml/badge.svg?branch=main)
+
 A python module for utilizing [`nhls`](https://github.com/TEALab-org/nhls).
 `nhls_py` is not bindings to a rust library.
 Instead it generates rust code 
