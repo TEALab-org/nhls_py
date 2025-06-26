@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 from . import nhls_path
 
+
 # Test if we can run rustup commands
 def check_rustup_present():
     try:
